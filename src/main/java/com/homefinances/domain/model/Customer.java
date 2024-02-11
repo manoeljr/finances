@@ -2,29 +2,46 @@ package com.homefinances.domain.model;
 
 import com.homefinances.enums.TypeRoles;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 import java.time.Instant;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table(name = "tbl_clientes")
 public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_cliente")
     private Integer idCustomer;
+
+    @NotNull
     @Column(nullable = false)
     private String name;
-    @Column(nullable = false, unique = true)
+
+    @NotNull
+    @Column(nullable = false, unique = true, length = 50)
     private String username;
+
+    @NotNull
+    @Size(min = 6)
     @Column(nullable = false)
     private String password;
+
+    @NotNull
+    @Email
     @Column(unique = true)
     private String email;
+
     @Enumerated(EnumType.STRING)
-    private TypeRoles roles;
-    private boolean enabled;
+    private TypeRoles roles = TypeRoles.USER;
+
+    private boolean enabled = true;
     private Instant lastLogin = Instant.now();
+
+    @OneToMany(mappedBy = "customer")
+    private List<Purchase> purchases;
 
     public Customer() {
     }
@@ -112,6 +129,14 @@ public class Customer {
 
     public void setLastLogin(Instant lastLogin) {
         this.lastLogin = lastLogin;
+    }
+
+    public List<Purchase> getPurchases() {
+        return purchases;
+    }
+
+    public void setPurchases(List<Purchase> purchases) {
+        this.purchases = purchases;
     }
 
     @Override

@@ -1,4 +1,4 @@
-package com.homefinances.web.request;
+package com.homefinances.web.request.customer;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.homefinances.domain.model.Customer;

@@ -1,10 +1,10 @@
 package com.homefinances.web;
 
-import com.homefinances.domain.model.Customer;
+
 import com.homefinances.domain.service.customer.CustomerService;
 import com.homefinances.web.request.customer.RegisterCustomerDTO;
 import com.homefinances.web.response.customer.CreatedCustomerDTO;
-import com.homefinances.web.response.customer.ResponseCustomer;
+import com.homefinances.web.response.customer.ResponseCustomerDTO;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -25,12 +25,12 @@ public class CustomerRestController {
     }
 
     @GetMapping
-    public ResponseEntity<List<ResponseCustomer>> getCustomer() {
+    public ResponseEntity<List<ResponseCustomerDTO>> getCustomer() {
         var customers = service.getListCustomer();
         if (customers.isEmpty()) {
             return ResponseEntity.ok().body(new ArrayList<>());
         }
-        return ResponseEntity.ok().body(ResponseCustomer.convertCustomerForDto(customers));
+        return ResponseEntity.ok().body(ResponseCustomerDTO.convertCustomerForDto(customers));
     }
 
     @PostMapping

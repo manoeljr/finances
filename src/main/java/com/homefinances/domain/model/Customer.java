@@ -41,7 +41,7 @@ public class Customer {
     private Instant lastLogin = Instant.now();
 
     @OneToMany(mappedBy = "customer")
-    private List<Purchase> purchases;
+    private List<Buy> buys;
 
     public Customer() {
     }
@@ -131,12 +131,12 @@ public class Customer {
         this.lastLogin = lastLogin;
     }
 
-    public List<Purchase> getPurchases() {
-        return purchases;
+    public List<Buy> getBuys() {
+        return buys;
     }
 
-    public void setPurchases(List<Purchase> purchases) {
-        this.purchases = purchases;
+    public void setBuys(List<Buy> purchases) {
+        this.buys = purchases;
     }
 
     @Override

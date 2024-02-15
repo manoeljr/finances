@@ -26,7 +26,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public void RemoveCustomer(Integer idCustomer) {
-
+        // TODO
     }
 
     @Override
